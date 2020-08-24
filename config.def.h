@@ -82,13 +82,14 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static const char *firefox[] = { "firefox", NULL };
 
 #include "movestack.c"
+// keysyms can be found at /usr/include/X11/keysymdef.h
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_y,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = spotifytoggle } },
-	{ ControlMask|ShiftMask,        XK_c,      spawn,          {.v = firefox } },
+	{ MODKEY,                       XK_c,      spawn,          {.v = firefox } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
