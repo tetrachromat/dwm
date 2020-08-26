@@ -59,6 +59,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -80,6 +81,10 @@ static const char *spotifytoggle[] = { "playerctl", "-p", "spotify", "play-pause
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const char *firefox[] = { "firefox", NULL };
+static const char *incbl[] = { "derp", "i", NULL };
+static const char *decbl[] = { "derp", "d", NULL };
+static const char *incabl[] = { "aderp", "i", NULL };
+static const char *decabl[] = { "aderp", "d", NULL };
 
 #include "movestack.c"
 // keysyms can be found at /usr/include/X11/keysymdef.h
@@ -90,13 +95,17 @@ static Key keys[] = {
 	{ MODKEY,                       XK_y,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = spotifytoggle } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = firefox } },
+	{ MODKEY|ALTKEY,                XK_equal,  spawn,          {.v = incbl } },
+	{ MODKEY|ALTKEY,                XK_minus,  spawn,          {.v = decbl } },
+	{ MODKEY|ALTKEY|ShiftMask,      XK_equal,  spawn,          {.v = incabl } },
+	{ MODKEY|ALTKEY|ShiftMask,      XK_minus,  spawn,          {.v = decabl } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05 } },
+	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_space,  zoom,           {0} },
