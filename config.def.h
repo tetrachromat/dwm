@@ -8,8 +8,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const int user_bh            = 20;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const Bool statusmarkup      = True;     /* True means use pango markup in status message */
-static const char font[]            = "monospace 10";
-static const char dmenufont[]       = "monospace:size=10";
+static const char font[]            = "monospace 8";
+static const char dmenufont[]       = "monospace:size=8";
 static const char col_gray1[]       = "#262626";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#878787";
