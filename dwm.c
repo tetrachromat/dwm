@@ -329,10 +329,13 @@ keyrelease(XEvent *e)
 		}
 	}
 	if (e->xkey.keycode == XKeysymToKeycode(dpy, HOLDKEY)) {
-		selmon->showbar = 0;
-		updateholdbarpos(selmon);
-		XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-		arrange(selmon);
+    Monitor *m;
+    for (m = mons; m; m = m->next) {
+      m->showbar = 0;
+      updateholdbarpos(m);
+      XMoveResizeWindow(dpy, m->barwin, m->wx, m->by, m->ww, bh);
+      arrange(m);
+    }
 	}
 }
 
