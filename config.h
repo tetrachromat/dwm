@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -17,7 +17,7 @@ static const char col_gray4[]       = "#ffffff";
 static const char col_cyan[]        = "#87ffff";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_cyan, col_gray2, col_gray2 },
+	[SchemeNorm] = { col_cyan, col_gray2, col_gray4 },
 	[SchemeSel]  = { col_cyan, col_gray2, col_cyan  },
   // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeStatus]  = { col_cyan, col_gray1,  "#000000"  }, 
