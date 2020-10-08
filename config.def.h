@@ -85,6 +85,7 @@ static const char *incbl[] = { "derp", "i", NULL };
 static const char *decbl[] = { "derp", "d", NULL };
 static const char *incabl[] = { "aderp", "i", NULL };
 static const char *decabl[] = { "aderp", "d", NULL };
+static const char *pst[] = { "pst", NULL };
 
 #include "movestack.c"
 // keysyms can be found at /usr/include/X11/keysymdef.h
@@ -99,6 +100,7 @@ static Key keys[] = {
 	{ MODKEY|ALTKEY,                XK_minus,  spawn,          {.v = decbl } },
 	{ MODKEY|ALTKEY|ShiftMask,      XK_equal,  spawn,          {.v = incabl } },
 	{ MODKEY|ALTKEY|ShiftMask,      XK_minus,  spawn,          {.v = decabl } },
+	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = pst } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
