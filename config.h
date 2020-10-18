@@ -10,7 +10,7 @@ static const int user_bh            = 20;        /* 0 means that dwm will calcul
 static const Bool statusmarkup      = True;     /* True means use pango markup in status message */
 static const char font[]            = "monospace 8";
 static const char dmenufont[]       = "monospace:size=8";
-static const char col_gray1[]       = "#262626";
+static const char col_gray1[]       = "#303030";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#878787";
 static const char col_gray4[]       = "#ffffff";
