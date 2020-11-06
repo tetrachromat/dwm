@@ -78,6 +78,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-i", "-hp", "dis
 //   "-nb", col_gray1, "-nf", col_cyan, "-sb", col_cyan, "-sf", col_gray1, "-h", "20", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *spotifytoggle[] = { "playerctl", "-p", "spotify", "play-pause", NULL };
+static const char *vlctoggle[] = { "playerctl", "-p", "vlc", "play-pause", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const char *firefox[] = { "firefox", NULL };
@@ -95,6 +96,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_y,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = spotifytoggle } },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = vlctoggle } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = firefox } },
 	{ MODKEY|ALTKEY,                XK_equal,  spawn,          {.v = incbl } },
 	{ MODKEY|ALTKEY,                XK_minus,  spawn,          {.v = decbl } },
