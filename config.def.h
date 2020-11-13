@@ -86,6 +86,8 @@ static const char *incbl[] = { "derp", "i", NULL };
 static const char *decbl[] = { "derp", "d", NULL };
 static const char *incabl[] = { "aderp", "i", NULL };
 static const char *decabl[] = { "aderp", "d", NULL };
+static const char *zzz[] = { "sudo", "zzz", NULL };
+static const char *ZZZ[] = { "sudo", "ZZZ", NULL };
 static const char *pst[] = { "pst", NULL };
 
 #include "movestack.c"
@@ -103,6 +105,8 @@ static Key keys[] = {
 	{ MODKEY|ALTKEY|ShiftMask,      XK_equal,  spawn,          {.v = incabl } },
 	{ MODKEY|ALTKEY|ShiftMask,      XK_minus,  spawn,          {.v = decabl } },
 	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = pst } },
+	{ MODKEY|ControlMask,           XK_z,      spawn,          {.v = zzz } },
+	{ MODKEY|ShiftMask|ControlMask, XK_z,      spawn,          {.v = ZZZ } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
