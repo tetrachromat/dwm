@@ -17,4 +17,7 @@ if [[ $HOST == "ryuko" ]]; then
     desk
     sstart
   fi
+elif [[ $HOST == "gamagoori" ]]; then
+  dwnblocks &
+  backg &
 fi
