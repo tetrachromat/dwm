@@ -18,6 +18,7 @@ if [[ $HOST == "ryuko" ]]; then
     sstart
   fi
 elif [[ $HOST == "gamagoori" ]]; then
-  dwnblocks &
+  dwmblocks &
   backg &
+  mstart 
 fi
