@@ -18,7 +18,8 @@ if [[ $HOST == "ryuko" ]]; then
     sstart
   fi
 elif [[ $HOST == "gamagoori" ]]; then
-  dwmblocks &
+  /usr/lib/libexec/kdeconnectd &
+  dwnblocks &
   backg &
   mstart 
 fi
