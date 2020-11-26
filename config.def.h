@@ -86,8 +86,8 @@ static const char *incbl[] = { "derp", "i", NULL };
 static const char *decbl[] = { "derp", "d", NULL };
 static const char *incabl[] = { "aderp", "i", NULL };
 static const char *decabl[] = { "aderp", "d", NULL };
-static const char *zzz[] = { "sudo", "zzz", NULL };
-static const char *ZZZ[] = { "sudo", "ZZZ", NULL };
+static const char *zzz[] = { "sz", NULL };
+static const char *ZZZ[] = { "sZ", NULL };
 static const char *pst[] = { "pst", NULL };
 
 #include "movestack.c"
