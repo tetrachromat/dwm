@@ -7,6 +7,10 @@ if [[ $HOST == "ryuko" ]]; then
   #rmspot
   keebs 0
   /usr/lib/kdeconnectd &
+  /usr/bin/pipewire &
+  /usr/bin/pipewire-pulse &
+  /usr/bin/pipewire-media-session &
+  
   if [[ -f /etc/X11/xorg.conf ]]; then 
     dunst -config ~/.config/dunst/dunstrc -font "Monoid 6" &
     couch
