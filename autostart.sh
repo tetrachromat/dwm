@@ -25,6 +25,9 @@ if [[ $HOST == "ryuko" ]]; then
   sudo rntpd
 elif [[ $HOST == "gamagoori" ]]; then
   /usr/lib/libexec/kdeconnectd &
+  /usr/bin/pipewire &
+  /usr/bin/pipewire-pulse &
+  /usr/bin/pipewire-media-session &
   dwmblocks &
   backg &
   mstart 
