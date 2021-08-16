@@ -10,25 +10,23 @@ static const int user_bh            = 20;        /* 0 means that dwm will calcul
 static const Bool statusmarkup      = True;     /* True means use pango markup in status message */
 static const char font[]            = "monospace 8";
 static const char dmenufont[]       = "monospace:size=8";
-static const char col_gray1[]       = "#303030";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#878787";
-static const char col_gray4[]       = "#ffffff";
-static const char col_cyan[]        = "#87ffff";
+static const char col_black[]       = "#030303";
+static const char col_white[]       = "#fbf5f3";
+static const char col_red[]         = "#fe3198";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_cyan, col_gray2, col_gray4 },
-	[SchemeSel]  = { col_cyan, col_gray2, col_cyan  },
+	[SchemeNorm] = { col_red, col_black, col_black },
+	[SchemeSel]  = { col_red, col_black, col_red  },
   // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeStatus]  = { col_cyan, col_gray1,  "#000000"  }, 
+	[SchemeStatus]  = { col_white, col_black,  "#000000"  }, 
   // Tagbar left selected {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  = { col_cyan, col_gray1,  "#000000"  }, 
+	[SchemeTagsSel]  = { col_red, col_black,  "#000000"  }, 
   // Tagbar left unselected {text,background,not used but cannot be empty}
-  [SchemeTagsNorm]  = { col_gray4, col_gray1,  "#000000"  }, 
+  [SchemeTagsNorm]  = { col_white, col_black,  "#000000"  }, 
   // infobar middle  selected {text,background,not used but cannot be empty}
-  [SchemeInfoSel]  = { col_gray4, col_gray1,  "#000000"  }, 
+  [SchemeInfoSel]  = { col_white, col_black,  "#000000"  }, 
   // infobar middle  unselected {text,background,not used but cannot be empty}
-  [SchemeInfoNorm]  = { col_gray4, col_gray1,  "#000000"  }, 
+  [SchemeInfoNorm]  = { col_white, col_black,  "#000000"  }, 
 };
 
 /* tagging */
@@ -40,7 +38,6 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class  instance    title     tags mask isfloating monitor float x,y,w,h  floatborderpx*/
-	{ "Gimp", NULL,       NULL,     0,        1,         -1,     50,50,500,500, 5 },
 	{ "st",   NULL,   "scratchpad", 0,        1,         -1,     0,0,1920,300,  1 },
 };
 
@@ -74,8 +71,6 @@ static const Layout layouts[] = {
 /* component of dmenucmd, manipulated in spawn() */
 static char dmenumon[2] = "0"; 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-i", "-hp", "discord", NULL };
-// static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
-//   "-nb", col_gray1, "-nf", col_cyan, "-sb", col_cyan, "-sf", col_gray1, "-h", "20", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *spotifytoggle[] = { "playerctl", "-p", "spotify", "play-pause", NULL };
 static const char *vlctoggle[] = { "playerctl", "-p", "vlc", "play-pause", NULL };

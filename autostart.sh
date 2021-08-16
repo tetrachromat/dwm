@@ -22,7 +22,9 @@ if [[ $HOST == "ryuko" ]]; then
     desk
     sstart
   fi
+
   sudo rntpd
+
 elif [[ $HOST == "gamagoori" ]]; then
   /usr/lib/libexec/kdeconnectd &
   dwmblocks &
