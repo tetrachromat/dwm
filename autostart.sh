@@ -27,6 +27,9 @@ if [[ $HOST == "ryuko" ]]; then
 
 elif [[ $HOST == "gamagoori" ]]; then
   /usr/lib/libexec/kdeconnectd &
+  /usr/bin/pipewire &
+  /usr/bin/pipewire-pulse &
+  /usr/bin/pipewire-media-session &
   dwmblocks &
   backg &
   mstart 
