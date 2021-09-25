@@ -36,7 +36,7 @@ elif [[ $HOST == "gamagoori" ]]; then
   mstart 
 elif [[ $HOST == "barazo" ]]; then
   # TODO: fix this
-  #dwmblocks &
+  dwmblocks &
   backg &
   startup 
 fi
