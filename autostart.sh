@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+#
 
 # only execute for ryuko
 if [[ $HOST == "ryuko" ]]; then
@@ -33,4 +34,9 @@ elif [[ $HOST == "gamagoori" ]]; then
   dwmblocks &
   backg &
   mstart 
+elif [[ $HOST == "barazo" ]]; then
+  # TODO: fix this
+  dwmblocks &
+  backg &
+  startup 
 fi
