@@ -11,16 +11,16 @@ if [[ $HOST == "ryuko" ]]; then
   /usr/bin/pipewire-pulse &
   /usr/bin/pipewire-media-session &
   
-  if [[ -f /etc/X11/xorg.conf ]]; then 
-    dunst -config ~/.config/dunst/dunstrc -font "Monoid 6" &
-    couch
-    mstart
-  else
+  if [[ -f /etc/X11/xorg.conf.d/20-gpus.conf ]]; then 
     dunst -config ~/.config/dunst/dunstrc &
     noisetorch -i
     sleep 3
     desk
     sstart
+  else
+    dunst -config ~/.config/dunst/dunstrc -font "Monoid 6" &
+		lrs
+    mstart
   fi
 
   sudo rntpd

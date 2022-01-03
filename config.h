@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -85,6 +86,11 @@ static const char *decabl[] = { "aderp", "d", NULL };
 static const char *zzz[] = { "sz", NULL };
 static const char *ZZZ[] = { "sZ", NULL };
 static const char *pst[] = { "pst", NULL };
+static const char *dunstclear[] = { "dunstctl", "close", NULL };
+static const char *vold[] = { "vold", NULL };
+static const char *volu[] = { "volu", NULL };
+static const char *lock[] = { "slock", NULL };
+static const char *lzzz[] = { "lzzz", NULL };
 
 #include "movestack.c"
 // keysyms can be found at /usr/include/X11/keysymdef.h
@@ -104,6 +110,9 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = pst } },
 	{ MODKEY|ControlMask,           XK_z,      spawn,          {.v = zzz } },
 	{ MODKEY|ShiftMask|ControlMask, XK_z,      spawn,          {.v = ZZZ } },
+	{ MODKEY,                       XK_u,		   spawn,          {.v = dunstclear } },
+	{ MODKEY|ControlMask,           XK_l,		   spawn,          {.v = lock } },
+	{ MODKEY|ControlMask|ShiftMask, XK_l,		   spawn,          {.v = lzzz } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -130,6 +139,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_a,      setgaps,        {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_s,      setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask|ControlMask, XK_s,      setgaps,        {.i = 0  } },
+  // volume keys
+	{ 0,              XF86XK_AudioLowerVolume, spawn,          {.v = vold } },
+	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = volu } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
