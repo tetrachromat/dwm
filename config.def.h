@@ -39,7 +39,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class  instance    title     tags mask isfloating monitor float x,y,w,h  floatborderpx*/
-	{ "st",   NULL,   "scratchpad", 0,        1,         -1,     0,0,1920,300,  1 },
+	{ "st",   NULL,   "scratchpad", 0,        1,         -1,     0,0,1916,300,  1 },
+	{ "zoom", NULL,   NULL,					0,        1,         -1,     0,0,-1,-1, 1 },
 };
 
 /* layout(s) */
@@ -89,6 +90,8 @@ static const char *pst[] = { "pst", NULL };
 static const char *dunstclear[] = { "dunstctl", "close", NULL };
 static const char *vold[] = { "vold", NULL };
 static const char *volu[] = { "volu", NULL };
+static const char *volm[] = { "volm", NULL };
+static const char *volg[] = { "volg", NULL };
 static const char *lock[] = { "slock", NULL };
 static const char *lzzz[] = { "lzzz", NULL };
 
@@ -142,6 +145,8 @@ static Key keys[] = {
   // volume keys
 	{ 0,              XF86XK_AudioLowerVolume, spawn,          {.v = vold } },
 	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = volu } },
+	{ 0,              XF86XK_AudioMicMute,     spawn,          {.v = volm } },
+	{ 0,              XF86XK_Tools,            spawn,          {.v = volg } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

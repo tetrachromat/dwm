@@ -97,6 +97,7 @@ struct Client {
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
 	int floatborderpx;
+	int hasfloatbw;
 	Client *next;
 	Client *snext;
 	Monitor *mon;
@@ -388,11 +389,15 @@ applyrules(Client *c)
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
 			c->floatborderpx = r->floatborderpx;
+			if (r->floatborderpx >= 0) {
+				c->floatborderpx = r->floatborderpx;
+				c->hasfloatbw = 1;
+			}
 			if (r->isfloating) {
-				c->x = r->floatx;
-				c->y = r->floaty;
-				c->w = r->floatw;
-				c->h = r->floath;
+				if (r->floatx >= 0) c->x = c->mon->mx + r->floatx;
+				if (r->floaty >= 0) c->y = c->mon->my + r->floaty;
+				if (r->floatw >= 0) c->w = r->floatw;
+				if (r->floath >= 0) c->h = r->floath;
 			}
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
@@ -1200,10 +1205,13 @@ manage(Window w, XWindowAttributes *wa)
 	if (!strcmp(c->name, scratchpadname)) {
 		c->mon->tagset[c->mon->seltags] |= c->tags = scratchtag;
 		c->isfloating = True;
-		c->x = 0;
-		c->y = 0;
+		// here
+		/* c->x = 0; */
+		/* c->y = 0; */
 		/* c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2); */
 		/* c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2); */
+		c->x = c->mon->wx;
+		c->y = c->mon->wy;
 	}
 
 	wc.border_width = c->bw;
@@ -1442,7 +1450,7 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	c->oldy = c->y; c->y = wc.y = y;
 	c->oldw = c->w; c->w = wc.width = w;
 	c->oldh = c->h; c->h = wc.height = h;
-	if (c->isfloating)
+	if (c->isfloating && c->hasfloatbw && !c->isfullscreen)
 		wc.border_width = c->floatborderpx;
 	else
 		wc.border_width = c->bw;
