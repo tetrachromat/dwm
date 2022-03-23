@@ -10,7 +10,7 @@ if [[ $HOST == "ryuko" ]]; then
   /usr/lib/kdeconnectd &
   /usr/bin/pipewire &
   /usr/bin/pipewire-pulse &
-  /usr/bin/pipewire-media-session &
+  /usr/bin/wireplumber &
   
   if [[ -f /etc/X11/xorg.conf.d/20-gpus.conf ]]; then 
     dunst -config ~/.config/dunst/dunstrc &
