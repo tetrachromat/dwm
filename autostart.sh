@@ -3,7 +3,7 @@
 
 # only execute for ryuko
 if [[ $HOST == "ryuko" ]]; then
-  dwmblocks &
+  #dwmblocks &
   fixbl &
   #rmspot
   keebs 0
@@ -21,6 +21,7 @@ if [[ $HOST == "ryuko" ]]; then
   else
     dunst -config ~/.config/dunst/dunstrc -font "Monoid 6" &
 		lrs
+		msv u picom
     mstart
   fi
 
