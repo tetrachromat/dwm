@@ -98,70 +98,71 @@ static const char *lzzz[] = { "lzzz", NULL };
 
 #include "movestack.c"
 // keysyms can be found at /usr/include/X11/keysymdef.h
-static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_y,      togglescratch,  {.v = scratchpadcmd } },
-	{ MODKEY,                       XK_m,      spawn,          {.v = spotifytoggle } },
-	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = vlctoggle } },
-	{ MODKEY,                       XK_c,      spawn,          {.v = firefox } },
-	{ MODKEY,                       XK_s,      spawn,          {.v = scrotcmd } },
-	{ MODKEY|ALTKEY,                XK_equal,  spawn,          {.v = incbl } },
-	{ MODKEY|ALTKEY,                XK_minus,  spawn,          {.v = decbl } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_equal,  spawn,          {.v = incabl } },
-	{ MODKEY|ALTKEY|ShiftMask,      XK_minus,  spawn,          {.v = decabl } },
-	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = pst } },
-	{ MODKEY|ControlMask,           XK_z,      spawn,          {.v = zzz } },
-	{ MODKEY|ShiftMask|ControlMask, XK_z,      spawn,          {.v = ZZZ } },
-	{ MODKEY,                       XK_u,		   spawn,          {.v = dunstclear } },
-	{ MODKEY|ControlMask,           XK_l,		   spawn,          {.v = lock } },
-	{ MODKEY|ControlMask|ShiftMask, XK_l,		   spawn,          {.v = lzzz } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05 } },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05 } },
-	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
-	{ MODKEY,                       XK_space,  zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // set tiling
-	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} }, // set monocle / fullscreen
-	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {0} }, // floating
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_minus,  view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_minus,  tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = +1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_a,      setgaps,        {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_s,      setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask|ControlMask, XK_s,      setgaps,        {.i = 0  } },
-  // volume keys
-	{ 0,              XF86XK_AudioLowerVolume, spawn,          {.v = vold } },
-	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = volu } },
-	{ 0,              XF86XK_AudioMicMute,     spawn,          {.v = volm } },
-	{ 0,              XF86XK_Tools,            spawn,          {.v = volg } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	TAGKEYS(                        XK_0,                      9)
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_r,      quit,           {1} }, 
-	{ 0,                            HOLDKEY,   holdbar,        {0} },
-};
+static Key keys[] = { NULL };
+// static Key keys[] = {
+// 	/* modifier                     key        function        argument */
+// 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+// 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+// 	{ MODKEY,                       XK_y,      togglescratch,  {.v = scratchpadcmd } },
+// 	{ MODKEY,                       XK_m,      spawn,          {.v = spotifytoggle } },
+// 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = vlctoggle } },
+// 	{ MODKEY,                       XK_c,      spawn,          {.v = firefox } },
+// 	{ MODKEY,                       XK_s,      spawn,          {.v = scrotcmd } },
+// 	{ MODKEY|ALTKEY,                XK_equal,  spawn,          {.v = incbl } },
+// 	{ MODKEY|ALTKEY,                XK_minus,  spawn,          {.v = decbl } },
+// 	{ MODKEY|ALTKEY|ShiftMask,      XK_equal,  spawn,          {.v = incabl } },
+// 	{ MODKEY|ALTKEY|ShiftMask,      XK_minus,  spawn,          {.v = decabl } },
+// 	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = pst } },
+// 	{ MODKEY|ControlMask,           XK_z,      spawn,          {.v = zzz } },
+// 	{ MODKEY|ShiftMask|ControlMask, XK_z,      spawn,          {.v = ZZZ } },
+// 	{ MODKEY,                       XK_u,		   spawn,          {.v = dunstclear } },
+// 	{ MODKEY|ControlMask,           XK_l,		   spawn,          {.v = lock } },
+// 	{ MODKEY|ControlMask|ShiftMask, XK_l,		   spawn,          {.v = lzzz } },
+// 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+// 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+// 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+// 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+// 	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
+// 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05 } },
+// 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05 } },
+// 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+// 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
+// 	{ MODKEY,                       XK_space,  zoom,           {0} },
+// 	{ MODKEY,                       XK_Tab,    view,           {0} },
+// 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
+// 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // set tiling
+// 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
+// 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} }, // set monocle / fullscreen
+// 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {0} }, // floating
+// 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+// 	{ MODKEY,                       XK_minus,  view,           {.ui = ~0 } },
+// 	{ MODKEY|ShiftMask,             XK_minus,  tag,            {.ui = ~0 } },
+// 	{ MODKEY,                       XK_comma,  focusmon,       {.i = +1 } },
+// 	{ MODKEY,                       XK_period, focusmon,       {.i = -1 } },
+// 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = +1 } },
+// 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = -1 } },
+// 	{ MODKEY|ShiftMask,             XK_a,      setgaps,        {.i = -1 } },
+// 	{ MODKEY|ShiftMask,             XK_s,      setgaps,        {.i = +1 } },
+// 	{ MODKEY|ShiftMask|ControlMask, XK_s,      setgaps,        {.i = 0  } },
+//   // volume keys
+// 	// { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = vold } },
+// 	// { 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = volu } },
+// 	// { 0,              XF86XK_AudioMicMute,     spawn,          {.v = volm } },
+// 	// { 0,              XF86XK_Tools,            spawn,          {.v = volg } },
+// 	TAGKEYS(                        XK_1,                      0)
+// 	TAGKEYS(                        XK_2,                      1)
+// 	TAGKEYS(                        XK_3,                      2)
+// 	TAGKEYS(                        XK_4,                      3)
+// 	TAGKEYS(                        XK_5,                      4)
+// 	TAGKEYS(                        XK_6,                      5)
+// 	TAGKEYS(                        XK_7,                      6)
+// 	TAGKEYS(                        XK_8,                      7)
+// 	TAGKEYS(                        XK_9,                      8)
+// 	TAGKEYS(                        XK_0,                      9)
+// 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} },
+// 	{ MODKEY|ControlMask|ShiftMask, XK_r,      quit,           {1} }, 
+// 	{ 0,                            HOLDKEY,   holdbar,        {0} },
+// };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
@@ -190,6 +191,12 @@ void
 viewex(const Arg *arg)
 {
 	view(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+viewprev(const Arg *arg)
+{
+	view(&((Arg) { 0 }));
 }
 
 void
@@ -236,6 +243,7 @@ static Signal signals[] = {
 	{ "tagmon",         tagmon },
 	{ "zoom",           zoom },
 	{ "view",           view },
+	{ "viewprev",       viewprev },
 	{ "viewall",        viewall },
 	{ "viewex",         viewex },
 	{ "toggleview",     view },
@@ -249,4 +257,7 @@ static Signal signals[] = {
 	{ "quit",           quit },
 	{ "setlayout",      setlayout },
 	{ "setlayoutex",    setlayoutex },
+	{ "holdbar",				holdbar },
+	{ "movestack",			movestack },
+	{ "togglescratch",	togglescratch },
 };

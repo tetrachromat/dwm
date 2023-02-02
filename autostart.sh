@@ -11,6 +11,7 @@ if [[ $HOST == "ryuko" ]]; then
   /usr/bin/pipewire &
   /usr/bin/pipewire-pulse &
   /usr/bin/wireplumber &
+	runsvdir -P ~/.sv/service &
   
   if [[ -f /etc/X11/xorg.conf.d/20-gpus.conf ]]; then 
     dunst -config ~/.config/dunst/dunstrc &

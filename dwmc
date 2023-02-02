@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
 
 signal() {
-	xsetroot -name "fsignal:$*"
-	xsetroot -name "fsignal:$*"
+	xsetroot -name "dwmc:$*"
 }
 
 case $# in
+
 1)
 	case $1 in
-	setlayout | view | viewall | togglebar | togglefloating | zoom | killclient | quit)
+	setlayout | view | viewprev | viewall | togglebar | togglefloating | zoom | killclient )
 		signal $1
 		;;
 	*)
@@ -22,7 +22,7 @@ case $# in
 	view)
 		signal $1 ui $2
 		;;
-	viewex | toggleviewex | tagex | toggletagex | setlayoutex | focusstack | incnmaster | focusmon | tagmon)
+	viewex | toggleviewex | tagex | toggletagex | setlayoutex | focusstack | incnmaster | focusmon | movestack | tagmon | holdbar | quit)
 		signal $1 i $2
 		;;
 	setmfact)

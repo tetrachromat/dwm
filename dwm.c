@@ -327,9 +327,22 @@ struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 void
 holdbar(const Arg *arg)
 {
-	selmon->showbar = 1;
-	updateholdbarpos(selmon);
-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+
+	// add functionality for holdbar to operate on an argument instead of relying
+	// on the builtin keyboard management
+	if (arg->i == 1) {
+		selmon->showbar = 1;
+		updateholdbarpos(selmon);
+		XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+	} else {
+		Monitor *m;
+		for (m = mons; m; m = m->next) {
+			m->showbar = 0;
+			updateholdbarpos(m);
+			XMoveResizeWindow(dpy, m->barwin, m->wx, m->by, m->ww, bh);
+			arrange(m);
+		}
+	}
 }
 
 
@@ -1164,7 +1177,7 @@ int
 fake_signal(void)
 {
 	char fsignal[256];
-	char indicator[9] = "fsignal:";
+	char indicator[9] = "dwmc:";
 	char str_sig[50];
 	char param[16];
 	int i, len_str_sig, n, paramn;
