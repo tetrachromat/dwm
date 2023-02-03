@@ -163,7 +163,7 @@ static void arrange(Monitor *m);
 static void arrangemon(Monitor *m);
 static void attach(Client *c);
 static void attachBelow(Client *c);
-static void toggleAttachBelow();
+static void toggleAttachBelow(void);
 static void attachstack(Client *c);
 static int fake_signal(void);
 static void buttonpress(XEvent *e);
@@ -540,7 +540,7 @@ attachBelow(Client *c)
 
 }
 
-void toggleAttachBelow()
+void toggleAttachBelow(void)
 {
 	attachbelow = !attachbelow;
 }

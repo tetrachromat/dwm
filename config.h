@@ -34,13 +34,14 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
+static const char scratchpadname[] = "scratchpad";
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class  instance    title     tags mask isfloating monitor float x,y,w,h  floatborderpx*/
-	{ "st",   NULL,   "scratchpad", 0,        1,         -1,     0,0,1916,300,  1 },
+	{ "st",   NULL,   scratchpadname, 0,        1,         -1,     0,0,1916,300,  1 },
 	{ "zoom", NULL,   NULL,					0,        1,         -1,     0,0,-1,-1, 1 },
 };
 
@@ -72,7 +73,6 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *scratchpadname[] = { "scratchpad", NULL }; 
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
