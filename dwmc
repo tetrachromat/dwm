@@ -8,7 +8,7 @@ case $# in
 
 1)
 	case $1 in
-	setlayout | view | viewprev | viewall | togglebar | togglefloating | zoom | killclient )
+	setlayout | view | viewprev | viewall | togglebar | togglefloating | zoom | killclient | togglescratch )
 		signal $1
 		;;
 	*)
