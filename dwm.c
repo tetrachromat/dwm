@@ -1477,10 +1477,83 @@ propertynotify(XEvent *e)
 }
 
 void
+saveSession(void)
+{
+	FILE *fw = fopen(SESSION_FILE, "w");
+	// loop through all monitors instead of just doing a single window
+	for (Monitor *m = selmon; m; m = m->next) {
+		for (Client *c = m->clients; c != NULL; c = c->next) { 
+			// get all the clients with their tags and monitor indices, 
+			// and write them to the file
+			fprintf(fw, "%u %lu %u\n", c->mon->num, c->win, c->tags);
+		}
+	}
+	fclose(fw);
+}
+
+/*
+ * TODO
+ * get this to preserve other monitor details too, if possible 
+ **/
+// return 0 if we fail (not a restart), or 1 if success
+int
+restoreSession(void)
+{
+	// restore session
+	FILE *fr = fopen(SESSION_FILE, "r");
+	if (!fr)
+		return 0;
+
+	// allocate enough space for expected input from text file
+	char *str = malloc(27 * sizeof(char)); 
+	while (fscanf(fr, "%[^\n] ", str) != EOF) { 
+		unsigned int monnum;
+		long unsigned int winId;
+		unsigned int tagsForWin;
+		int check = sscanf(str, "%u %lu %u", &monnum, &winId, &tagsForWin); // get data
+		if (check != 3) // break loop if data wasn't read correctly
+			break;
+		
+		for (Client *c = selmon->clients; c ; c = c->next) { 
+			// add tags to every window by winId
+			if (c->win == winId) {
+				// loop through monitor indices to place windows properly
+				Monitor *m = selmon;
+				while (m->num != monnum) {
+					m = m->next;
+				}
+				sendmon(c, m);
+				c->tags = tagsForWin;
+				break;
+			}
+		}
+	}
+
+	for (Client *c = selmon->clients; c ; c = c->next) { // refocus on windows
+		focus(c);
+		restack(c->mon);
+	}
+
+	for (Monitor *m = selmon; m; m = m->next) // rearrange all monitors
+		arrange(m);
+
+	free(str);
+	fclose(fr);
+	
+	// delete a file
+	remove(SESSION_FILE);
+
+	return 1;
+}
+
+void
 quit(const Arg *arg)
 {
 	if(arg->i) restart = 1;
 	running = 0;
+
+	if (restart == 1)
+		saveSession();
 }
 
 Monitor *
@@ -2584,7 +2657,9 @@ main(int argc, char *argv[])
 		die("pledge");
 #endif /* __OpenBSD__ */
 	scan();
-	runautostart();
+	// if we can't restore the session, run the autostart script
+	if (!restoreSession())
+		runautostart();
 	run();
 	if(restart) execvp(argv[0], argv);
 	cleanup();
