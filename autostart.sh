@@ -7,6 +7,7 @@ if [[ $HOST == "ryuko" ]]; then
   fixbl &
   #rmspot
   keebs 0
+	xbacklight -set 30 
   /usr/lib/kdeconnectd &
   /usr/bin/pipewire &
   /usr/bin/pipewire-pulse &
