@@ -20,29 +20,31 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { col_red, col_black, col_black },
 	[SchemeSel]  = { col_red, col_black, col_red  },
   // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeStatus]  = { col_white, col_black,  "#000000"  }, 
+	[SchemeStatus]  = { col_white, col_black,  "#000000"  },
   // Tagbar left selected {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  = { col_red, col_black,  "#000000"  }, 
+	[SchemeTagsSel]  = { col_red, col_black,  "#000000"  },
   // Tagbar left unselected {text,background,not used but cannot be empty}
-  [SchemeTagsNorm]  = { col_white, col_black,  "#000000"  }, 
+  [SchemeTagsNorm]  = { col_white, col_black,  "#000000"  },
   // infobar middle  selected {text,background,not used but cannot be empty}
-  [SchemeInfoSel]  = { col_white, col_black,  "#000000"  }, 
+  [SchemeInfoSel]  = { col_white, col_black,  "#000000"  },
   // infobar middle  unselected {text,background,not used but cannot be empty}
-  [SchemeInfoNorm]  = { col_white, col_black,  "#000000"  }, 
+  [SchemeInfoNorm]  = { col_white, col_black,  "#000000"  },
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
 static const char scratchpadname[] = "scratchpad";
+static const char scratchemacsname[] = "emacs-scratch";
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class  instance    title     tags mask isfloating monitor float x,y,w,h  floatborderpx*/
-	{ "st",   NULL,   scratchpadname, 0,        1,         -1,     0,0,1916,300,  1 },
-	{ "zoom", NULL,   NULL,					0,        1,         -1,     0,0,-1,-1, 1 },
+/* class  instance   title      tags mask isfloating monitor float x,y,w,h  floatborderpx*/
+	{ "st",    NULL,   scratchpadname,   0,        1,         -1,     0,0,1916,300,  1 },
+	{ "Emacs", NULL,   scratchemacsname, 0,        1,         -1,     0,0,1916,300,  1 },
+	{ "zoom",  NULL,   NULL,					   0,        1,         -1,     0,0,-1,-1,     1 },
 };
 
 /* layout(s) */
@@ -67,13 +69,14 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
-#define HOLDKEY XK_Super_L 
+#define HOLDKEY XK_Super_L
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, NULL };
+static const char *scratchemacscmd[] = { "emacs", "-T", scratchemacsname, "-f", "scratch-width", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
@@ -152,6 +155,12 @@ togglescratchex(const Arg *arg)
 	togglescratch(&((Arg){.v = scratchpadcmd}));
 }
 
+void
+toggleemacsex(const Arg *arg)
+{
+	toggleemacs(&((Arg){.v = scratchemacscmd}));
+}
+
 /* signal definitions */
 /* signum must be greater than 0 */
 /* trigger signals using `xsetroot -name "fsignal:<signame> [<type> <value>]"` */
@@ -183,4 +192,5 @@ static Signal signals[] = {
 	{ "holdbar",				holdbar },
 	{ "movestack",			movestack },
 	{ "togglescratch",	togglescratchex },
+	{ "toggleemacs",	  toggleemacsex },
 };

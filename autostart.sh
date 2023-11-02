@@ -3,15 +3,9 @@
 
 # only execute for ryuko
 if [[ $HOST == "ryuko" ]]; then
-  #dwmblocks &
   fixbl &
-  #rmspot
   keebs 0
 	xbacklight -set 30 
-  /usr/lib/kdeconnectd &
-  /usr/bin/pipewire &
-  /usr/bin/pipewire-pulse &
-  /usr/bin/wireplumber &
 	runsvdir -P ~/.sv/service &
   
   if [[ -f /etc/X11/xorg.conf.d/20-gpus.conf ]]; then 

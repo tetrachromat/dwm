@@ -238,6 +238,7 @@ static void togglebar(const Arg *arg);
 static void holdbar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
+static void toggleemacs(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
@@ -308,6 +309,7 @@ static Window root, wmcheckwin;
 #include "config.h"
 
 static unsigned int scratchtag = 1 << LENGTH(tags);
+static unsigned int emacstag = 2 << LENGTH(tags);
 
 struct Pertag {
 	unsigned int curtag, prevtag; /* current and previous tag */
@@ -1275,6 +1277,14 @@ manage(Window w, XWindowAttributes *wa)
 		c->y = c->mon->wy;
 	}
 
+	selmon->tagset[selmon->seltags] &= ~emacstag;
+	if (!strcmp(c->name, scratchemacsname)) {
+		c->mon->tagset[c->mon->seltags] |= c->tags = emacstag;
+		c->isfloating = True;
+		c->x = c->mon->wx;
+		c->y = c->mon->wy;
+	}
+
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
 	XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
@@ -1482,8 +1492,8 @@ saveSession(void)
 	FILE *fw = fopen(SESSION_FILE, "w");
 	// loop through all monitors instead of just doing a single window
 	for (Monitor *m = selmon; m; m = m->next) {
-		for (Client *c = m->clients; c != NULL; c = c->next) { 
-			// get all the clients with their tags and monitor indices, 
+		for (Client *c = m->clients; c != NULL; c = c->next) {
+			// get all the clients with their tags and monitor indices,
 			// and write them to the file
 			fprintf(fw, "%u %lu %u\n", c->mon->num, c->win, c->tags);
 		}
@@ -1493,7 +1503,7 @@ saveSession(void)
 
 /*
  * TODO
- * get this to preserve other monitor details too, if possible 
+ * get this to preserve other monitor details too, if possible
  **/
 // return 0 if we fail (not a restart), or 1 if success
 int
@@ -1505,16 +1515,16 @@ restoreSession(void)
 		return 0;
 
 	// allocate enough space for expected input from text file
-	char *str = malloc(27 * sizeof(char)); 
-	while (fscanf(fr, "%[^\n] ", str) != EOF) { 
+	char *str = malloc(27 * sizeof(char));
+	while (fscanf(fr, "%[^\n] ", str) != EOF) {
 		unsigned int monnum;
 		long unsigned int winId;
 		unsigned int tagsForWin;
 		int check = sscanf(str, "%u %lu %u", &monnum, &winId, &tagsForWin); // get data
 		if (check != 3) // break loop if data wasn't read correctly
 			break;
-		
-		for (Client *c = selmon->clients; c ; c = c->next) { 
+
+		for (Client *c = selmon->clients; c ; c = c->next) {
 			// add tags to every window by winId
 			if (c->win == winId) {
 				// loop through monitor indices to place windows properly
@@ -1539,7 +1549,7 @@ restoreSession(void)
 
 	free(str);
 	fclose(fr);
-	
+
 	// delete a file
 	remove(SESSION_FILE);
 
@@ -2053,6 +2063,7 @@ void
 spawn(const Arg *arg)
 {
 	selmon->tagset[selmon->seltags] &= ~scratchtag;
+	selmon->tagset[selmon->seltags] &= ~emacstag;
 	if (fork() == 0) {
 		if (dpy)
 			close(ConnectionNumber(dpy));
@@ -2142,6 +2153,28 @@ togglescratch(const Arg *arg)
 	for (c = selmon->clients; c && !(found = c->tags & scratchtag); c = c->next);
 	if (found) {
 		unsigned int newtagset = selmon->tagset[selmon->seltags] ^ scratchtag;
+		if (newtagset) {
+			selmon->tagset[selmon->seltags] = newtagset;
+			focus(NULL);
+			arrange(selmon);
+		}
+		if (ISVISIBLE(c)) {
+			focus(c);
+			restack(selmon);
+		}
+	} else
+		spawn(arg);
+}
+
+void
+toggleemacs(const Arg *arg)
+{
+	Client *c;
+	unsigned int found = 0;
+
+	for (c = selmon->clients; c && !(found = c->tags & emacstag); c = c->next);
+	if (found) {
+		unsigned int newtagset = selmon->tagset[selmon->seltags] ^ emacstag;
 		if (newtagset) {
 			selmon->tagset[selmon->seltags] = newtagset;
 			focus(NULL);
