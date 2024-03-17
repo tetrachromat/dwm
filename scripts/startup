@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+# startup -- start several programs after x server initializes, based on hostname
+
+# only execute for ryuko
+if [[ $HOST == "ryuko" ]]; then
+    fixbl &
+    keebs 0
+    xbacklight -set 30
+    runsvdir -P ~/.sv/service &
+
+    if [[ -f /etc/X11/xorg.conf.d/20-gpus.conf ]]; then
+        sleep 3
+        desk
+        sstart
+  else
+        lrs
+        msv u picom
+        mstart
+  fi
+
+    sudo rntpd
+
+elif [[ $HOST == "gamagoori" ]]; then
+    /usr/lib/libexec/kdeconnectd &
+    /usr/bin/pipewire &
+    /usr/bin/pipewire-pulse &
+    /usr/bin/pipewire-media-session &
+    dwmblocks &
+    backg &
+    mstart
+elif [[ $HOST == "barazo" ]]; then
+    # TODO: fix this
+    dwmblocks &
+    backg &
+    startup
+fi
