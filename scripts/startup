@@ -3,7 +3,6 @@
 
 # only execute for ryuko
 if [[ $HOST == "ryuko" ]]; then
-    fixbl &
     keebs 0
     xbacklight -set 30
     runsvdir -P ~/.sv/service &
