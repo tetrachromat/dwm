@@ -19,6 +19,9 @@ if [[ $HOST == "ryuko" ]]; then
 
     sudo rntpd
 
+elif [[ $HOST == "senketsu" ]]; then
+	(sleep 2 && runsvdir -P ~/.sv/service) &
+
 elif [[ $HOST == "gamagoori" ]]; then
     /usr/lib/libexec/kdeconnectd &
     /usr/bin/pipewire &
