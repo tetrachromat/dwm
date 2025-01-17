@@ -8,7 +8,7 @@ OBJ = ${SRC:.c=.o}
 
 all: options dwm
 
-options:
+options: config.h
 	@echo dwm build options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
@@ -25,7 +25,7 @@ config.h:
 dwm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
-clean: config.h
+clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz.h *.rej *.orig config.h
 
 dist: clean

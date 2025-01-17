@@ -1,25 +1,12 @@
 #!/usr/bin/env zsh
 # startup -- start several programs after x server initializes, based on hostname
 
-# only execute for ryuko
-if [[ $HOST == "ryuko" ]]; then
-    keebs 0
+# only execute for magenta
+if [[ $HOST == "magenta" ]]; then
     xbacklight -set 30
     runsvdir -P ~/.sv/service &
 
-    if [[ -f /etc/X11/xorg.conf.d/20-gpus.conf ]]; then
-        sleep 3
-        desk
-        sstart
-  else
-        lrs
-        msv u picom
-        mstart
-  fi
-
-    sudo rntpd
-
-elif [[ $HOST == "senketsu" ]]; then
+elif [[ $HOST == "turquoise" ]]; then
 	(sleep 2 && runsvdir -P ~/.sv/service) &
 
 elif [[ $HOST == "gamagoori" ]]; then
